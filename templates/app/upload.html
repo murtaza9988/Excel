@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your Excel File</title>
+    <style>
+        .container { text-align: center; margin-top: 50px; }
+        .file-list-container { margin-top: 20px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 5px 0; }
+        a { text-decoration: none; padding: 10px; display: block; border: 1px solid #ddd; }
+        a:hover { background-color: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Upload Your Excel File</h1>
+        </header>
+
+        <div class="file-list-container">
+            <h2>List of Files and Folders from GitHub</h2>
+            <ul>
+                {% for item in files %}
+                    {% if item.type == 'dir' %}
+                        <!-- Link for navigating into folders -->
+                        <li><a href="{% url 'upload_folder' folder_name=item.name %}">{{ item.name }}/</a></li>
+                    {% elif item.type == 'file' %}
+                        <!-- Link for processing files -->
+                        <li>
+                            <a href="{% url 'upload_file' folder_name=folder_name file_name=item.name %}">{{ item.name }}</a>
+                        </li>
+                    {% endif %}
+                {% empty %}
+                    <li>No files or folders found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <footer>
+            <p>&copy; <span id="year"></span> Your Company Name</p>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript to dynamically set the current year in the footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

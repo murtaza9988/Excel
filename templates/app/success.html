@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Success!</h1>
+        </div>
+    </header>
+    
+    <main>
+        <section class="success">
+            <div class="container">
+                <p>Your Excel file has been successfully processed and the data has been saved!</p>
+                <a href="{% url 'export_data_to_excel' %}" class="btn-primary">Export Data to Excel</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
